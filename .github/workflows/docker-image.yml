@@ -11,10 +11,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: check the current repository instead of passing the git repo link to be built
     - uses: actions/checkout@v4
+     
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+          
     - name: Build the Docker image
       run: 
         docker build . --file Dockerfile -tag ${{secrets.DOCKER_USERNAME}}/django_webapp:v1.0
-        docker login --username ${{secrets.DOCKER_USERNAME}} --password ${{secrets.DOCKER_PASSWORD}}
         docker push ${{secrets.DOCKER_USERNAME}}/django_webapp:v1.0
-      
