@@ -1,17 +1,11 @@
-FROM ubuntu
+FROM python:3.6-slim
 
-RUN apt update -y
-# RUN apt install software-properties-common && apt-get update -y
-# RUN add-apt-repository ppa:deadsnakes/ppa
-
-
-# RUN apt install python3.6 -y && apt intall pip3
-RUN apt install python3 -y && apt install python3-pip -y
+WORKDIR /app
 
 COPY . .
 
-RUN pip3 install -r requirements.txt
-RUN python3 manage.py makemigrations
-RUN python3 manage.py migrate
+RUN pip install -r requirements.txt
 
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+RUN python manage.py makemigrations && python manage.py migrate
+
+CMD ["python3.6", "manage.py", "runserver", "0.0.0.0:8000"]
