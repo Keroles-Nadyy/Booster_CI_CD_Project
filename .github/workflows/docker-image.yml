@@ -23,4 +23,7 @@ jobs:
     - name: Build the Docker image
       run: 
         docker build . --file Dockerfile -tag ${{secrets.DOCKER_USERNAME}}/django_webapp:v1.0
+    
+    - name: Push the Docker image
+      run:
         docker push ${{secrets.DOCKER_USERNAME}}/django_webapp:v1.0
