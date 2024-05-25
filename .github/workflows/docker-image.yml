@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - name: check the current repository instead of passing the git repo link to be built
-    - uses: actions/checkout@v4
+      uses: actions/checkout@v4
      
     - name: Login to Docker Hub
       uses: docker/login-action@v3
